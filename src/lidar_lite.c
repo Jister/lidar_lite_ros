@@ -1,4 +1,4 @@
-#include "lidarLite.h"
+#include "lidar_lite.h"
 
 bool _dbg;
    
@@ -33,8 +33,9 @@ int lidar_read(int fd)
        
       // Read second byte and append with first 
       loVal = _read_byteNZ(fd, DISTANCE_REG_LO) ;        
-      if (_dbg) printf{
-            (" Lo=%d\n", loVal);
+      if (_dbg)
+      {
+           printf(" Lo=%d\n", loVal);
       }
            
       // read first byte 

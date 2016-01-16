@@ -44,7 +44,7 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * uncomment the generate_messages entry below
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
-Generate messages in the 'msg' folder
+#Generate messages in the 'msg' folder
 add_message_files(
    FILES
    Lidarlite.msg
@@ -64,7 +64,7 @@ add_message_files(
 #   Action2.action
 # )
 
-Generate added messages and services with any dependencies listed here
+#Generate added messages and services with any dependencies listed here
 generate_messages(
    DEPENDENCIES
    std_msgs
@@ -104,7 +104,7 @@ catkin_package(
 #  LIBRARIES lidar_lite_ros
 #  CATKIN_DEPENDS roscpp rospy std_msgs
 #  DEPENDS system_lib
-  CATKIN_DEPENDS message_runtime
+ CATKIN_DEPENDS message_runtime
 )
 
 ###########
@@ -120,9 +120,6 @@ include_directories(
 )
 
 ## Declare a C++ library
-add_library(lidar_lite_ros
-  src/lidar_lite.c
-)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -130,11 +127,11 @@ add_library(lidar_lite_ros
 # add_dependencies(lidar_lite_ros ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-add_executable(lidarlite_node src/lidarlite.cpp)
+add_executable(lidarlite_node src/lidarlite.cpp src/lidar_lite.c)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-# add_dependencies(lidar_lite_ros_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(lidarlite_node lidarlite_node_generate_message_cpp)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(lidarlite_node

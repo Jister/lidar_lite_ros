@@ -1,9 +1,7 @@
 #include "ros/ros.h"
-#include "lidarLite.h"
+#include "lidar_lite.h"
 #include "lidar_lite_ros/Lidarlite.h"
 #include "std_msgs/String.h"
-#include <stdio.h>
-#include <stdlib.h>
 #include <time.h>
 
 int main(int argc, char **argv)
