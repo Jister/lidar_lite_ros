@@ -1,4 +1,4 @@
-#include "lidar_lite.h"
+#include "lidar_lite_ros/lidar_lite.h"
 
 bool _dbg;
    

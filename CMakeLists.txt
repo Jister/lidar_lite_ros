@@ -113,30 +113,43 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-# include_directories(include)
+include_directories(include)
 include_directories(
   ${catkin_INCLUDE_DIRS}
   usr/local/include
 )
 
 ## Declare a C++ library
-
+add_library(lidar_lite
+  src/lidar_lite.c 
+)
+target_link_libraries(lidar_lite
+  ${catkin_LIBRARIES}
+  wiringPi
+  wiringPiDev
+  pthread
+)
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
 # add_dependencies(lidar_lite_ros ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-add_executable(lidarlite_node src/lidarlite.cpp src/lidar_lite.c)
+add_executable(lidarlite_node 
+  src/lidarlite.cpp 
+  src/lidar_lite.c
+  include/lidar_lite_ros/lidar_lite.h
+)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-add_dependencies(lidarlite_node lidarlite_node_generate_message_cpp)
+add_dependencies(lidarlite_node 
+  lidarlite_node_generate_message_cpp
+)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(lidarlite_node
-  ${catkin_LIBRARIES}
-  wiringPi
+  lidar_lite
 )
 
 #############
