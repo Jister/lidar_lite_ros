@@ -8,6 +8,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  message_generation
 )
 
 ## System dependencies are found with CMake's conventions
@@ -43,12 +44,11 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * uncomment the generate_messages entry below
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
-## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
-#   Message2.msg
-# )
+Generate messages in the 'msg' folder
+add_message_files(
+   FILES
+   Lidarlite.msg
+)
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -64,11 +64,11 @@ find_package(catkin REQUIRED COMPONENTS
 #   Action2.action
 # )
 
-## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs
-# )
+Generate added messages and services with any dependencies listed here
+generate_messages(
+   DEPENDENCIES
+   std_msgs
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -104,6 +104,7 @@ catkin_package(
 #  LIBRARIES lidar_lite_ros
 #  CATKIN_DEPENDS roscpp rospy std_msgs
 #  DEPENDS system_lib
+  CATKIN_DEPENDS message_runtime
 )
 
 ###########
@@ -115,12 +116,13 @@ catkin_package(
 # include_directories(include)
 include_directories(
   ${catkin_INCLUDE_DIRS}
+  usr/local/include
 )
 
 ## Declare a C++ library
-# add_library(lidar_lite_ros
-#   src/${PROJECT_NAME}/lidar_lite_ros.cpp
-# )
+add_library(lidar_lite_ros
+  src/lidar_lite.c
+)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -128,16 +130,17 @@ include_directories(
 # add_dependencies(lidar_lite_ros ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-# add_executable(lidar_lite_ros_node src/lidar_lite_ros_node.cpp)
+add_executable(lidarlite_node src/lidarlite.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(lidar_lite_ros_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(lidar_lite_ros_node
-#   ${catkin_LIBRARIES}
-# )
+target_link_libraries(lidarlite_node
+  ${catkin_LIBRARIES}
+  wiringPi
+)
 
 #############
 ## Install ##
