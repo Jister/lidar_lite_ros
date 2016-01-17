@@ -124,9 +124,9 @@ add_library(lidar_lite
   src/lidar_lite.c 
 )
 target_link_libraries(lidar_lite
-  ${catkin_LIBRARIES}
   wiringPi
-  wiringPiI2C
+  wiringPiDev
+  pthread
 )
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -135,20 +135,23 @@ target_link_libraries(lidar_lite
 
 ## Declare a C++ executable
 add_executable(lidarlite_node 
-  src/lidarlite.cpp 
-  src/lidar_lite.c
-  include/lidar_lite_ros/lidar_lite.h
+  src/lidarlite.cpp
+#  src/lidar_lite.c
+#  include/lidar_lite.h 
 )
-
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 add_dependencies(lidarlite_node 
   lidarlite_node_generate_message_cpp
+  lidar_lite
 )
-
 ## Specify libraries to link a library or executable target against
 target_link_libraries(lidarlite_node
+  ${catkin_LIBRARIES}
   lidar_lite
+#  wiringPi
+#  wiringPiDev
+#  pthread
 )
 
 #############
