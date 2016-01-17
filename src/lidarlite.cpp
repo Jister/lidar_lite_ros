@@ -1,5 +1,5 @@
 #include "ros/ros.h"
-#include "lidar_lite_ros/lidar_lite.h"
+#include "lidar_lite.h"
 #include "lidar_lite_ros/Lidarlite.h"
 #include "std_msgs/String.h"
 #include <time.h>
