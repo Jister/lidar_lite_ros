@@ -4,12 +4,13 @@
 #include "std_msgs/String.h"
 #include <time.h>
 
+
 int main(int argc, char **argv)
 {
   ros::init(argc, argv, "lidarlite_node");
   ros::NodeHandle n;
   ros::Publisher lidar_pub = n.advertise<lidar_lite_ros::Lidarlite>("lidar_distance", 1000);
-  ros::Rate loop_rate(10);
+  ros::Rate loop_rate(20);
 
   int fd;
   int value;
